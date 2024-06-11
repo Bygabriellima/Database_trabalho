@@ -1,0 +1,10 @@
+Qual o cliente que mais gastou em todos os anos?
+
+SELECT c.nome_cliente, SUM(p.preco_unitario_prato * CAST(pe.quantidade_pedido AS DECIMAL)) AS total_gasto
+FROM tb_pedido pe
+JOIN tb_mesa m ON pe.codigo_mesa = m.codigo_mesa
+JOIN tb_cliente c ON m.id_cliente = c.id_cliente
+JOIN tb_prato p ON pe.codigo_prato = p.codigo_prato
+GROUP BY c.nome_cliente
+ORDER BY total_gasto DESC
+LIMIT 1;

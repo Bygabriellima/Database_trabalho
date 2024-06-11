@@ -1,0 +1,14 @@
+Qual o cliente que mais fez pedidos por ano?
+
+SELECT 
+    YEAR(m.data_hora_entrada) AS ano,
+    c.nome_cliente,
+    COUNT(*) AS total_pedidos
+FROM
+    tb_pedido p
+        INNER JOIN
+    tb_mesa m ON p.codigo_mesa = m.codigo_mesa
+        INNER JOIN
+    tb_cliente c ON m.id_cliente = c.id_cliente
+GROUP BY ano, c.nome_cliente
+ORDER BY ano, total_pedidos DESC;
